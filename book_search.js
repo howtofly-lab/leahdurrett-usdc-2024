@@ -133,9 +133,35 @@ const notFoundOut4 ={
 }
 
     // Unit Test 5
+const caseIn5=[
+    {
+        "Title": "Thirty Hundred Lines Above the Sun",
+        "ISBN": "9780000528530",
+        "Content": [
+            {
+                "Page": 41,
+                "Line": 9,
+                "Text": "Here, he shouted."
+            },
+            {
+                "Page": 41,
+                "Line": 10,
+                "Text": "She sung here."
+            },
+            {
+                "Page": 41,
+                "Line": 11,
+                "Text": "They asked then."
+            } 
+        ] 
+    }
+]
+
 const caseOut5= {
-    'SearchTerm': 'canadian\'s',
-    'Results':[]
+    'SearchTerm': 'Here',
+    'Results':[
+        {"ISBN": "9780000528530", 'Page':41, 'Line':9}
+    ]
 }
 
     // Unit Test 6
@@ -188,17 +214,17 @@ const multipleIn9 = [
             {
                 "Page": 41,
                 "Line": 10,
-                "Text": "He ran"
+                "Text": "Here, he shouted."
             },
             {
                 "Page": 41,
                 "Line": 10,
-                "Text": "She sung"
+                "Text": "She sung here."
             },
             {
                 "Page": 41,
                 "Line": 11,
-                "Text": "They asked"
+                "Text": "They asked then."
             } 
         ] 
     }
@@ -276,10 +302,10 @@ if (JSON.stringify(notFoundOut4) === JSON.stringify(test4result)) {
 
 /** Case Sensitivity Unit Test */
 /**
- * Given the searchTerm "canadian's", we should not find a result in the book.
- * Although "Canadian's" does exist, our search term is not capitalized.
+ * Given the searchTerm "Here", we should find only one result in the book.
+ * Although "here' exists in the book, our search term is capitalized.
  */
-const test5result = findSearchTermInBooks("canadian\'s", twentyLeaguesIn);
+const test5result = findSearchTermInBooks("Here", caseIn5);
 if (JSON.stringify(caseOut5) === JSON.stringify(test5result)) {
     console.log("PASS: Test 5");
 } else {
@@ -322,7 +348,6 @@ if (JSON.stringify(emptyOut8) === JSON.stringify(test8result)) {
 
 
 /** Edge Case: Given multiple (2) books that both contain the searchTerm, we should get two results. */
-
 const test9result = findSearchTermInBooks("asked", multipleIn9); 
 if (test9result.Results.length == 2) {
     console.log("PASS: Test 9");
